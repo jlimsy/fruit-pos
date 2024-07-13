@@ -1,23 +1,24 @@
 import "./App.css";
-import Order from "../Order/OrderPage";
-import OrderHistory from "../Order/OrderHistoryPage";
-import Auth from "../Auth/AuthPage";
+import OrderPage from "../Order/OrderPage";
+import OrderHistoryPage from "../Order/OrderHistoryPage";
+import CheckoutPage from "../Order/CheckoutPage";
+import AuthPage from "../Auth/AuthPage";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   return (
     <main className="App">
       {user ? (
         <Routes>
-          <Route path="/orders/new" element={<Order />} />
-          <Route path="/orders/history" element={<OrderHistory />} />
-          <Route path="/orders/checkout" element={<OrderHistory />} />
+          <Route path="/orders/new" element={<OrderPage />} />
+          <Route path="/orders/history" element={<OrderHistoryPage />} />
+          <Route path="/orders/checkout" element={<CheckoutPage />} />
         </Routes>
       ) : (
-        <Auth />
+        <AuthPage />
       )}
     </main>
   );
