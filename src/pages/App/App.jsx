@@ -1,12 +1,12 @@
 import "./App.css";
+import Order from "../Order/Order";
+import Auth from "../Auth/Auth";
+import { useState } from "react";
 
 function App() {
-  return (
-    <main className="App">
-      {" "}
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </main>
-  );
+  const [user, setUser] = useState(null);
+
+  return <main className="App">{user ? <Order /> : <Auth />}</main>;
 }
 
 export default App;
