@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { signUp } from "../../utilities/users-service";
 
 export default function SignUpForm() {
   const {
@@ -7,17 +8,32 @@ export default function SignUpForm() {
     formState: { errors },
   } = useForm();
 
+  const submitData = async (event) => {
+    try {
+      const { username, email, password } = event;
+      const formData = { username, email, password };
+
+      const user = await signUp(formData);
+
+      console.log(event);
+    } catch (error) {
+      console.log("Unable to sign up:", error);
+    }
+  };
+
   return (
     <div>
       SignUpForm
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
-        <input {...register("firstName", { required: true })} />
-        {errors.lastName && <p>First name is required.</p>}
+      <form onSubmit={handleSubmit(submitData)}>
+        <input {...register("username", { required: true })} />
+        {errors.username && <p>Username is required.</p>}
 
-        <input {...register("lastName", { required: true })} />
-        {errors.lastName && <p>Last name is required.</p>}
-
-        <input {...register("email", { pattern: /\d+/ })} />
+        <input
+          {...register("email", {
+            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            required: true,
+          })}
+        />
         {errors.email && <p>Please enter a valid e-mail address.</p>}
 
         <input {...register("password", { pattern: /\d+/ })} />
