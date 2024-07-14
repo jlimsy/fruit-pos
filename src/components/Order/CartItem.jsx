@@ -9,6 +9,23 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function CartItem({ item, cart, setCart }) {
+  const handleAdd = (event) => {
+    setCart((prevItems) => {
+      console.log("prevItems, prevItems", prevItems);
+      return prevItems.map((item) =>
+        item.id === event.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    });
+  };
+
+  const handleMinus = (event) => {
+    setCart((prevItems) => {
+      return prevItems.map((item) =>
+        item.id === event.id ? { ...item, quantity: item.quantity - 1 } : item
+      );
+    });
+  };
+
   const handleRemove = (event) => {
     setCart(cart.filter((cartItem) => cartItem.id !== event.id));
     console.log("Remove");
@@ -22,8 +39,12 @@ export default function CartItem({ item, cart, setCart }) {
           <div className="flex">
             <CardDescription>
               <span className="mr-2">Quantity: {item.quantity}</span>
-              <Button className="h-3 p-3 mr-1">+</Button>
-              <Button className="h-3 p-3">-</Button>
+              <Button className="h-3 p-3 mr-1" onClick={() => handleAdd(item)}>
+                +
+              </Button>
+              <Button className="h-3 p-3" onClick={() => handleMinus(item)}>
+                -
+              </Button>
             </CardDescription>{" "}
           </div>
         </CardHeader>
