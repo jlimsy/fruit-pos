@@ -20,9 +20,11 @@ export default function CartItem({ item, cart, setCart }) {
 
   const handleMinus = (event) => {
     setCart((prevItems) => {
-      return prevItems.map((item) =>
+      const updatedItems = prevItems.map((item) =>
         item.id === event.id ? { ...item, quantity: item.quantity - 1 } : item
       );
+
+      return updatedItems.filter((item) => item.quantity > 0);
     });
   };
 
