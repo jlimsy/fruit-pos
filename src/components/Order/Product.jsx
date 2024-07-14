@@ -10,7 +10,19 @@ import { Button } from "@/components/ui/button";
 
 export default function Product({ item, cart, setCart }) {
   const handleCart = (event) => {
-    setCart([...cart, event]);
+    setCart((prevItems) => {
+      const itemExists = prevItems.find((item) => item.id === event.id);
+
+      if (itemExists) {
+        return prevItems.map((item) =>
+          item.id === event.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...prevItems, { ...event, quantity: 1 }];
+      }
+    });
+
+    console.log("Add to cart", cart);
   };
 
   return (
