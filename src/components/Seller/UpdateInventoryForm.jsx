@@ -60,7 +60,6 @@ export default function UpdateInventoryForm() {
               {...register("stock", { required: true })}
             />
             {errors.stock && <p>Starting stock is required.</p>}
-            <Label htmlFor="price">Stock</Label>
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
