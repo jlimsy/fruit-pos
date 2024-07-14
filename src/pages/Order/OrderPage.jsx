@@ -4,8 +4,7 @@ import NavBar from "../../components/NavBar";
 export default function OrderPage({ user, setUser }) {
   return (
     <div>
-      Order hello {user.name}
-      <NavBar setUser={setUser} />
+      <NavBar user={user} setUser={setUser} />
       <Cart />
     </div>
   );
