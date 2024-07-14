@@ -1,3 +1,5 @@
+import * as productsService from "../../utilities/products-service";
+
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -25,7 +27,7 @@ export default function UpdateInventoryForm() {
       const { fruit, price, stock } = event;
       const formData = { fruit, price, stock };
 
-      const product = await productService.updateInventory(formData);
+      const product = await productsService.updateInventory(formData);
     } catch (error) {
       console.log("Unable to update inventory", error);
     }

@@ -1,5 +1,9 @@
-import React from "react";
+import { Button } from "../ui/button";
 
 export default function Cart() {
-  return <div>Cart</div>;
+  return (
+    <div>
+      <Button>Checkout</Button>
+    </div>
+  );
 }
