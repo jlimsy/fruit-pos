@@ -8,7 +8,11 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-export default function Product({ item }) {
+export default function Product({ item, cart, setCart }) {
+  const handleCart = (event) => {
+    setCart([...cart, event]);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -22,7 +26,7 @@ export default function Product({ item }) {
       </CardContent>
       <CardFooter>
         <div className="flex flex-col">
-          <Button>Add to Cart</Button>
+          <Button onClick={() => handleCart(item)}>Add to Cart</Button>
           <p className="text-xs mt-2"> {item.stock} in stock</p>
         </div>
       </CardFooter>

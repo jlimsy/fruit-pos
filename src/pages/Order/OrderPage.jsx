@@ -26,9 +26,15 @@ export default function OrderPage({ user, setUser }) {
     <div>
       <NavBar user={user} setUser={setUser} />
 
-      <div className="flex gap-4 ">
-        <Stock products={products} />
-        <Cart />
+      <div className="grid grid-cols-4 gap-4">
+        <div className="col-span-3">
+          <div className="flex gap-4 ">
+            <Stock products={products} setCart={setCart} cart={cart} />
+          </div>
+        </div>
+        <div className="cols-span-1">
+          <Cart setCart={setCart} cart={cart} />
+        </div>
       </div>
     </div>
   );
