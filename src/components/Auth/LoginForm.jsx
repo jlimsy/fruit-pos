@@ -18,6 +18,12 @@ export default function LoginForm({ setUser, setIsNewUser }) {
   } = useForm();
 
   const submitData = async (event) => {
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
     try {
       const { email, password } = event;
       const formData = { email, password };
@@ -46,6 +52,10 @@ export default function LoginForm({ setUser, setIsNewUser }) {
             {...register("email", { required: true })}
           />
           {errors.email && <p>First name is required.</p>}
+
+          <Label className="sr-only" htmlFor="password">
+            Password
+          </Label>
 
           <Input
             id="password"

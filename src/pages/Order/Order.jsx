@@ -1,4 +1,4 @@
-import Cart from "../../components/Cart";
+import Cart from "../../components/Order/Cart";
 import NavBar from "../../components/NavBar";
 
 export default function Order() {

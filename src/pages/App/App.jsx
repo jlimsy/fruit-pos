@@ -6,6 +6,7 @@ import AuthPage from "../Auth/AuthPage";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
+import SellerPage from "../Seller/SellerPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -20,6 +21,7 @@ function App() {
           />
           <Route path="/orders/history" element={<OrderHistoryPage />} />
           <Route path="/orders/checkout" element={<CheckoutPage />} />
+          <Route path="/seller/update" element=<SellerPage /> />
         </Routes>
       ) : (
         <AuthPage setUser={setUser} />
