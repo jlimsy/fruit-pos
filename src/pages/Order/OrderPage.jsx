@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar";
 import Stock from "@/components/Order/Stock";
 import { useState, useEffect } from "react";
 import { getProducts } from "@/utilities/products-api";
+import AuthenticatedLayout from "@/layout/AuthenticatedLayout";
 
 export default function OrderPage({ user, setUser }) {
   const [products, setProducts] = useState([]);
@@ -23,18 +24,14 @@ export default function OrderPage({ user, setUser }) {
   }, []);
 
   return (
-    <div>
-      <NavBar user={user} setUser={setUser} />
-
-      <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2">
-          <div className="flex gap-4 ">
-            <Stock products={products} setCart={setCart} cart={cart} />
-          </div>
+    <div className="grid grid-cols-3 gap-4 p-10">
+      <div className="col-span-2">
+        <div className="flex gap-4 ">
+          <Stock products={products} setCart={setCart} cart={cart} />
         </div>
-        <div className="cols-span-1">
-          <Cart setCart={setCart} cart={cart} />
-        </div>
+      </div>
+      <div className="cols-span-1">
+        <Cart setCart={setCart} cart={cart} />
       </div>
     </div>
   );

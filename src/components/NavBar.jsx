@@ -36,20 +36,19 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav>
-      <NavigationMenu>
+      <NavigationMenu className="bg-primary-foreground p-2 ">
         <NavigationMenuList>
+          Welcome, {user.name}!
           <NavigationMenuItem>
             <NavigationMenuLink href="/orders/new">
               Create New Order
             </NavigationMenuLink>
           </NavigationMenuItem>
-
           <NavigationMenuItem>
             <NavigationMenuLink href="/orders/history">
               Order History
             </NavigationMenuLink>
           </NavigationMenuItem>
-
           <NavigationMenuItem>
             <NavigationMenuTrigger>Seller</NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -66,7 +65,6 @@ export default function NavBar({ user, setUser }) {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-
           <NavigationMenuItem className="justify-right">
             <NavigationMenuLink href="" onClick={handleLogOut}>
               Log Out
