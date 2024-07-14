@@ -22,7 +22,7 @@ function App() {
           <Route path="/orders/checkout" element={<CheckoutPage />} />
         </Routes>
       ) : (
-        <AuthPage />
+        <AuthPage setUser={setUser} />
       )}
     </main>
   );

@@ -2,7 +2,6 @@ import * as usersAPI from "./users-api";
 
 export async function signUp(userData) {
   const token = await usersAPI.signUp(userData);
-  console.log(token);
   localStorage.setItem("token", token);
   return token;
 }
@@ -26,6 +25,12 @@ export function getUser() {
   const token = getToken();
 
   return token ? JSON.parse(atob(token.split(".")[1])).user : null;
+}
+
+export async function login(loginCreds) {
+  const token = await usersAPI.login(loginCreds);
+  localStorage.setItem("token", token);
+  return getUser();
 }
 
 export function logOut() {
