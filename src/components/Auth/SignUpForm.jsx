@@ -10,8 +10,8 @@ export default function SignUpForm() {
 
   const submitData = async (event) => {
     try {
-      const { username, email, password } = event;
-      const formData = { username, email, password };
+      const { name, email, password } = event;
+      const formData = { name, email, password };
 
       const user = await signUp(formData);
 
@@ -25,8 +25,8 @@ export default function SignUpForm() {
     <div>
       SignUpForm
       <form onSubmit={handleSubmit(submitData)}>
-        <input {...register("username", { required: true })} />
-        {errors.username && <p>Username is required.</p>}
+        <input {...register("name", { required: true })} />
+        {errors.name && <p>Name is required.</p>}
 
         <input
           {...register("email", {

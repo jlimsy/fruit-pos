@@ -1,0 +1,19 @@
+meta {
+  name: user
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "hello",
+    "email": "hello@world.com",
+    "password": "123456"
+  }
+}
