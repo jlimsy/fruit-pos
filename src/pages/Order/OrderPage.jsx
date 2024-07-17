@@ -24,14 +24,14 @@ export default function OrderPage({ user, setUser }) {
   }, []);
 
   return (
-    <div className="grid grid-cols-3 gap-4 p-10">
-      <div className="col-span-2">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-10">
+      <div className="lg:col-span-2">
         <div className="flex gap-4 ">
           <Stock products={products} setCart={setCart} cart={cart} />
         </div>
       </div>
-      <div className="cols-span-1">
-        <Cart setCart={setCart} cart={cart} />
+      <div className="lg:cols-span-1">
+        <Cart user={user} setCart={setCart} cart={cart} />
       </div>
     </div>
   );

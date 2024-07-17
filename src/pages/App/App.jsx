@@ -4,7 +4,7 @@ import OrderHistoryPage from "../Order/OrderHistoryPage";
 import CheckoutPage from "../Order/CheckoutPage";
 import AuthPage from "../Auth/AuthPage";
 import { useState } from "react";
-import { Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import SellerPage from "../Seller/SellerPage";
 import AuthenticatedLayout from "@/layout/AuthenticatedLayout";

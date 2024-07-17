@@ -26,7 +26,8 @@ export default function SignUpForm({ setIsNewUser }) {
       const { name, email, password } = event;
       const formData = { name, email, password };
 
-      const user = await usersService.signUp(formData);
+      await usersService.signUp(formData);
+      setIsNewUser(false);
     } catch (error) {
       console.log("Unable to sign up:", error);
     }
