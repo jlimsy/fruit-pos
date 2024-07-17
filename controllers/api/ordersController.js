@@ -21,4 +21,14 @@ async function create(req, res) {
   }
 }
 
-module.exports = { create };
+async function getMyOrders(req, res) {
+  try {
+    const myOrder = await Order.find({ user: req.user._id });
+
+    res.json(myOrder);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}
+
+module.exports = { create, getMyOrders };

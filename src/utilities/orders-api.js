@@ -11,3 +11,13 @@ export async function placeOrder(orderData) {
     throw new Error("Unable to place order");
   }
 }
+
+export async function getMyOrders() {
+  const res = await sendRequest(BASE_URL, "GET");
+
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Unable to retrieve orders");
+  }
+}

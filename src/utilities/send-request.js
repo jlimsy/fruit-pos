@@ -21,7 +21,6 @@ export default async function sendRequest(url, method = "GET", payload = null) {
     // Older approach
     // options.headers = options.headers || {};
     options.headers.Authorization = `Bearer ${token}`;
-    console.log("options.headers %o", options.headers);
   }
 
   return await fetch(url, options);
