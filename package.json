@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "dev:express:windows": "set DEBUG=fruit-pos:* & node --watch server.js",
     "dev:express": "DEBUG=fruit-pos:* node --watch server.js",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
