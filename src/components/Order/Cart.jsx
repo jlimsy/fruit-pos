@@ -3,6 +3,7 @@ import CartItem from "./CartItem";
 import * as ordersService from "@/utilities/orders-service";
 
 export default function Cart({ user, cart, setCart }) {
+  console.log(user);
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0

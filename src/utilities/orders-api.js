@@ -1,12 +1,9 @@
+import sendRequest from "./send-request";
+
 const BASE_URL = "/api/orders";
 
 export async function placeOrder(orderData) {
-  console.log(orderData, "orderData order-api");
-  const res = await fetch(BASE_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(orderData),
-  });
+  const res = await sendRequest(BASE_URL, "POST", orderData);
 
   if (res.ok) {
     return res.json();
