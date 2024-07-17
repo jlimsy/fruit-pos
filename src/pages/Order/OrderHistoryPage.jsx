@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import dayjs from "dayjs";
 
 export default function OrderHistoryPage() {
   const [myOrders, setMyOrders] = useState([]);
@@ -34,7 +35,9 @@ export default function OrderHistoryPage() {
       {myOrders.map((order) => (
         <Card key={order._id}>
           <CardHeader>
-            <CardTitle>{order.createdAt}</CardTitle>
+            <CardTitle>
+              {dayjs(order.createdAt).format("DD MMM YYYY HH:mm")}
+            </CardTitle>
             <CardDescription>Order #: {order._id}</CardDescription>
           </CardHeader>
           <CardContent>
