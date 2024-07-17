@@ -1,7 +1,13 @@
+import sendRequest from "./send-request";
+
+import debug from "debug";
+const log = debug("utilities:products-api");
+
 const BASE_URL = "/api/products";
 
 export async function getProducts() {
-  const res = await fetch(BASE_URL, { method: "GET" });
+  const res = await sendRequest(BASE_URL, "GET");
+  log("res %o", res);
 
   if (res.ok) {
     return res.json();
@@ -11,11 +17,7 @@ export async function getProducts() {
 }
 
 export async function updateInventory(productData) {
-  const res = await fetch(BASE_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(productData),
-  });
+  const res = await sendRequest(BASE_URL, "POST", productData);
 
   if (res.ok) {
     return res.json();
