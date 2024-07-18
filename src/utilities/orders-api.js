@@ -21,3 +21,13 @@ export async function getMyOrders() {
     throw new Error("Unable to retrieve orders");
   }
 }
+
+export async function getAllOrders() {
+  const res = await sendRequest(BASE_URL, "GET");
+
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Unable to retrieve orders");
+  }
+}

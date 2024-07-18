@@ -44,4 +44,24 @@ async function getMyOrders(req, res) {
   }
 }
 
-module.exports = { create, getMyOrders };
+async function index(req, res) {
+  try {
+    const orders = await Order.find({})
+      .populate({
+        path: "items.fruit",
+        model: "Product",
+        select: "fruit",
+      })
+      .sort((a, b) => {
+        const order = ["pending", "out for delivery", "completed", "cancelled"];
+        return order.indexOf(a.status) - order.indexOf(b.status);
+      })
+      .sort({ createdAt: -1 });
+
+    res.json(orders);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}
+
+module.exports = { create, getMyOrders, index };

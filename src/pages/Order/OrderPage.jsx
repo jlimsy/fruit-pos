@@ -2,7 +2,7 @@ import Cart from "../../components/Order/Cart";
 import NavBar from "../../components/NavBar";
 import Stock from "@/components/Order/Stock";
 import { useState, useEffect } from "react";
-import { getProducts } from "@/utilities/products-api";
+import { getProducts } from "@/utilities/products-service";
 import AuthenticatedLayout from "@/layout/AuthenticatedLayout";
 
 export default function OrderPage({ user, setUser }) {

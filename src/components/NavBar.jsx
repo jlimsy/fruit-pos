@@ -16,8 +16,8 @@ export default function NavBar({ user, setUser }) {
   const ownerNavigation = [
     {
       title: "Pending Orders",
-      href: "/owner/pending",
-      description: "View all pending orders",
+      href: "/owner/view",
+      description: "View all orders",
     },
     {
       title: "Sales Dashboard",
