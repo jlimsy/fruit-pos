@@ -14,14 +14,11 @@ export default function UpdateInventoryForm() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const submitData = async (event) => {
     setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
 
     try {
       const { fruit, price, startingStock, remainingStock } = event;
@@ -32,9 +29,9 @@ export default function UpdateInventoryForm() {
         remainingStock: remainingStock || startingStock,
       };
 
-      console.log("formData:", formData);
-
       const product = await productsService.updateInventory(formData);
+      setIsLoading(false);
+      reset();
     } catch (error) {
       console.log("Unable to update inventory", error);
     }

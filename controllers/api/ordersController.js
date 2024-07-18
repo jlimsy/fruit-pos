@@ -18,7 +18,7 @@ async function create(req, res) {
     for (let i = 0; i < order.items.length; i++) {
       const item = order.items[i];
       const fruit = await mongoose.model("Product").findById(item.fruit);
-      fruit.stock -= item.quantity;
+      fruit.remainingStock -= item.quantity;
       await fruit.save();
     }
 
