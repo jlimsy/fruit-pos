@@ -13,20 +13,20 @@ import {
 } from "@/components/ui/navigation-menu";
 
 export default function NavBar({ user, setUser }) {
-  const sellerNavigation = [
+  const ownerNavigation = [
     {
       title: "Pending Orders",
-      href: "/seller/pending",
+      href: "/owner/pending",
       description: "View all pending orders",
     },
     {
       title: "Sales Dashboard",
-      href: "/seller/dashboard",
+      href: "/owner/dashboard",
       description: "View sales",
     },
     {
       title: "Update Inventory",
-      href: "/seller/update",
+      href: "/owner/update",
       description: "Add new stocks or update existing stocks",
     },
   ];
@@ -36,38 +36,45 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav>
-      <NavigationMenu className="bg-primary-foreground p-2 ">
-        <NavigationMenuList>
-          Welcome, {user.name}!
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/orders/new">
-              Create New Order
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/orders/history">
-              Order History
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          {user.role === "owner" && (
+      <NavigationMenu className="bg-primary-foreground p-4 ">
+        <NavigationMenuList className="flex w-screen px-10 justify-between">
+          <div>
+            <p>Welcome, {user.name}!</p>
+          </div>
+          <div className="flex gap-10">
+            {" "}
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Seller</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] text-left">
-                  {sellerNavigation.map((item) => (
-                    <ListItem
-                      key={item.title}
-                      title={item.title}
-                      href={item.href}
-                    >
-                      {item.description}
-                    </ListItem>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
+              <NavigationMenuLink href="/orders/new">
+                Create New Order
+              </NavigationMenuLink>
             </NavigationMenuItem>
-          )}
-          <NavigationMenuItem className="justify-right">
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/orders/history">
+                Order History
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            {user.role === "owner" && (
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Owner</NavigationMenuTrigger>
+
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] text-left">
+                    {ownerNavigation.map((item) => (
+                      <ListItem
+                        key={item.title}
+                        title={item.title}
+                        href={item.href}
+                      >
+                        {item.description}
+                      </ListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            )}
+          </div>
+
+          <NavigationMenuItem>
             <NavigationMenuLink href="" onClick={handleLogOut}>
               Log Out
             </NavigationMenuLink>
