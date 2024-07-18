@@ -1,9 +1,14 @@
 import * as usersAPI from "./users-api";
 
+import debug from "debug";
+const log = debug("utilities:users-service");
+
 export async function signUp(userData) {
   const token = await usersAPI.signUp(userData);
   localStorage.setItem("token", token);
-  return token;
+  log("token", token);
+
+  return getUser();
 }
 
 export function getToken() {

@@ -1,21 +1,19 @@
 const Order = require("../../models/order");
+const mongoose = require("mongoose");
 
 async function create(req, res) {
   try {
     const userId = req.user._id;
 
-    console.log(req.body);
+    console.log("req.body.items", req.body.items);
 
-    const convertFruitIdToObjectId = res.body.map((item) => {
-      return {
-        fruit: item._id,
-        quantity: item.quantity,
-      };
+    const order = await Order.create({
+      user: userId,
+      items: req.body.items,
+      ...req.body,
     });
 
-    const order = await Order.create({ ...req.body, user: userId });
-
-    console.log(order);
+    console.log("order", order);
 
     res.status(201).json(order);
   } catch (error) {
@@ -23,4 +21,20 @@ async function create(req, res) {
   }
 }
 
-module.exports = { create };
+async function getMyOrders(req, res) {
+  try {
+    const myOrder = await Order.find({ user: req.user._id })
+      .populate({
+        path: "items.fruit",
+        model: "Product",
+        select: "fruit",
+      })
+      .sort({ createdAt: -1 });
+
+    res.json(myOrder);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}
+
+module.exports = { create, getMyOrders };
