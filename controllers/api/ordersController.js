@@ -23,7 +23,13 @@ async function create(req, res) {
 
 async function getMyOrders(req, res) {
   try {
-    const myOrder = await Order.find({ user: req.user._id });
+    const myOrder = await Order.find({ user: req.user._id })
+      .populate({
+        path: "items.fruit",
+        model: "Product",
+        select: "fruit",
+      })
+      .sort({ createdAt: -1 });
 
     res.json(myOrder);
   } catch (error) {

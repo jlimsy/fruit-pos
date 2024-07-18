@@ -33,7 +33,7 @@ export default function OrderHistoryPage() {
     <div className="flex flex-col items-center justify-center gap-4">
       <h1>My Order History</h1>
       {myOrders.map((order) => (
-        <Card key={order._id}>
+        <Card key={order._id} className="w-full max-w-md">
           <CardHeader>
             <CardTitle>
               {dayjs(order.createdAt).format("DD MMM YYYY HH:mm")}
@@ -43,8 +43,9 @@ export default function OrderHistoryPage() {
           <CardContent>
             {order.items.map((item) => (
               <div key={item._id}>
-                <p>{item._id}</p>
-                <p>{item.quantity}</p>
+                <p>
+                  {item.fruit.fruit} x {item.quantity}
+                </p>
               </div>
             ))}
           </CardContent>
@@ -55,8 +56,7 @@ export default function OrderHistoryPage() {
                   Status: <span>{order.status}</span>
                 </p>
               </div>
-              <div>
-                {" "}
+              <div className="flex">
                 <p>Total Price: </p>
                 <h1>${Number(order.totalPrice).toFixed(2)}</h1>
               </div>
