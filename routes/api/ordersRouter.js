@@ -6,6 +6,6 @@ const { checkRole } = require("../../middleware/checkRole");
 
 router.post("/", authJWT, checkRole("owner"), ordersCtrl.create);
 router.get("/", authJWT, ordersCtrl.getMyOrders);
-router.get("/", authJWT, ordersCtrl.index);
+router.get("/all", authJWT, checkRole("owner"), ordersCtrl.index);
 
 module.exports = router;

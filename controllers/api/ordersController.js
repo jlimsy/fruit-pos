@@ -48,16 +48,19 @@ async function index(req, res) {
   try {
     const orders = await Order.find({})
       .populate({
+        path: "user",
+        model: "User",
+        select: "name",
+      })
+      .populate({
         path: "items.fruit",
         model: "Product",
         select: "fruit",
       })
-      .sort((a, b) => {
-        const order = ["pending", "out for delivery", "completed", "cancelled"];
-        return order.indexOf(a.status) - order.indexOf(b.status);
-      })
+      .sort({ status: -1 })
       .sort({ createdAt: -1 });
 
+    console.log(orders);
     res.json(orders);
   } catch (error) {
     res.status(400).json(error);

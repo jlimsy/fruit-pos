@@ -6,7 +6,7 @@ export default function AuthenticatedLayout({ user, setUser }) {
   return (
     <div>
       <NavBar user={user} />
-      <section>
+      <section className="mt-4">
         <Outlet />
       </section>
       <Toaster />

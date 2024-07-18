@@ -1,14 +1,6 @@
 import { useEffect } from "react";
 import { getAllOrders } from "@/utilities/orders-service";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   Table,
   TableBody,
   TableCaption,
@@ -36,9 +28,11 @@ export default function ViewOrdersPage() {
     fetchOrders();
   }, []);
 
+  console.log(allOrders);
+
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <div className="mt-6">
+      <div>
         <h1>View All Orders</h1>
       </div>
       <div>
@@ -49,6 +43,7 @@ export default function ViewOrdersPage() {
               <TableHead>Date</TableHead>
               <TableHead>Fruits</TableHead>
               <TableHead>Total Price</TableHead>
+              <TableHead>Deliver</TableHead>
               <TableHead>Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -69,7 +64,8 @@ export default function ViewOrdersPage() {
                     </div>
                   ))}
                 </TableCell>
-                <TableCell>${Number(order.totalPrice).toFixed(2)}</TableCell>
+                <TableCell>${Number(order.totalPrice).toFixed(2)}</TableCell>{" "}
+                <TableCell>{order.user.name}</TableCell>
                 <TableCell>{order.status}</TableCell>
               </TableRow>
             ))}

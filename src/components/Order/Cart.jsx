@@ -1,7 +1,6 @@
 import { Button } from "../ui/button";
 import CartItem from "./CartItem";
-import * as ordersService from "@/utilities/orders-service";
-import { useState } from "react";
+import { placeOrder } from "@/utilities/orders-service";
 import { useToast } from "@/components/ui/use-toast";
 import dayjs from "dayjs";
 
@@ -26,7 +25,7 @@ export default function Cart({ user, cart, setCart }) {
       totalPrice: totalPrice,
     };
 
-    await ordersService.placeOrder(orderData);
+    await placeOrder(orderData);
 
     setCart([]);
 
@@ -37,7 +36,8 @@ export default function Cart({ user, cart, setCart }) {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
+      <h1 className="text-center">Cart</h1>
       {cart.map((item) => (
         <CartItem key={item.id} item={item} cart={cart} setCart={setCart} />
       ))}

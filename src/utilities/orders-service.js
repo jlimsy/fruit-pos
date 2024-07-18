@@ -6,6 +6,6 @@ export async function placeOrder(orderData) {
 }
 
 export async function getAllOrders() {
-  const updatedOrder = await ordersAPI.getAllOrders();
-  return updatedOrder;
+  const orders = await ordersAPI.getAllOrders();
+  return orders;
 }

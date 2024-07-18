@@ -23,7 +23,7 @@ export async function getMyOrders() {
 }
 
 export async function getAllOrders() {
-  const res = await sendRequest(BASE_URL, "GET");
+  const res = await sendRequest(BASE_URL + "/all", "GET");
 
   if (res.ok) {
     return res.json();

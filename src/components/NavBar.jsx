@@ -41,7 +41,7 @@ export default function NavBar({ user, setUser }) {
           <div>
             <p>Welcome, {user.name}!</p>
           </div>
-          <div className="flex gap-10">
+          <div className="flex gap-10 items-center">
             {" "}
             <NavigationMenuItem>
               <NavigationMenuLink href="/orders/new">
@@ -58,7 +58,7 @@ export default function NavBar({ user, setUser }) {
                 <NavigationMenuTrigger>Owner</NavigationMenuTrigger>
 
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] text-left">
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                     {ownerNavigation.map((item) => (
                       <ListItem
                         key={item.title}

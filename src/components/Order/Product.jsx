@@ -26,7 +26,7 @@ export default function Product({ item, cart, setCart }) {
   };
 
   return (
-    <Card>
+    <Card className="w-fit">
       <CardHeader>
         <CardTitle>{item.fruit}</CardTitle>
       </CardHeader>

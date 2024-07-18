@@ -6,8 +6,8 @@ export default function AuthPage({ setUser }) {
   const [isNewUser, setIsNewUser] = useState(false);
 
   return (
-    <div>
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="mx-auto w-full flex-col max-w-sm">
         {isNewUser ? (
           <SignUpForm setIsNewUser={setIsNewUser} />
         ) : (
