@@ -14,4 +14,4 @@
 2. Owner access allows the following features:
 - Owner can view all orders.
 - Owner can add new fruits into his inventory.
-- Owner can view Sales Dashboard.
+- Owner can view Sales Dashboard (in progress)
