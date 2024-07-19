@@ -5,5 +5,5 @@ export async function getProducts() {
 }
 
 export async function updateInventory(formData) {
-  await productsAPI.updateInventory(formData);
+  return await productsAPI.updateInventory(formData);
 }

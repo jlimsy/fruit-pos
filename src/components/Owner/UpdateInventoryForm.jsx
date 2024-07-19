@@ -14,20 +14,24 @@ export default function UpdateInventoryForm() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const submitData = async (event) => {
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
     try {
-      const { fruit, price, stock } = event;
-      const formData = { fruit, price, stock };
+      const { fruit, price, startingStock, remainingStock } = event;
+      const formData = {
+        fruit,
+        price,
+        startingStock,
+        remainingStock: remainingStock || startingStock,
+      };
 
       const product = await productsService.updateInventory(formData);
+      setIsLoading(false);
+      reset();
     } catch (error) {
       console.log("Unable to update inventory", error);
     }
@@ -55,13 +59,21 @@ export default function UpdateInventoryForm() {
             />
             {errors.price && <p>Price is required.</p>}
 
-            <Label htmlFor="stock">Stock</Label>
+            <Label htmlFor="starting-stock">Starting Stock</Label>
             <Input
-              id="stock"
+              id="starting-stock"
               placeholder="Starting stock"
-              {...register("stock", { required: true })}
+              {...register("startingStock", { required: true })}
             />
             {errors.stock && <p>Starting stock is required.</p>}
+
+            <Label htmlFor="remaining-stock">Available Stock</Label>
+            <Input
+              id="remaining-stock"
+              placeholder="Available stock"
+              {...register("remainingStock")}
+            />
+            {errors.stock && <p>Remaining stock is required.</p>}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}

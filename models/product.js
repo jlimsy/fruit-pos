@@ -7,8 +7,16 @@ const productSchema = new Schema({
     type: mongoose.Types.Decimal128,
     required: true,
     get: (v) => (v ? Number(parseFloat(v.toString()).toFixed(2)) : v),
+    set: (v) => mongoose.Types.Decimal128.fromString(Number(v).toFixed(2)),
   },
-  stock: { type: Number, required: true },
+  startingStock: { type: Number, required: true },
+  remainingStock: {
+    type: Number,
+    required: true,
+    default: function () {
+      return this.startingStock;
+    },
+  },
 });
 
 productSchema.set("toJSON", { getters: true });

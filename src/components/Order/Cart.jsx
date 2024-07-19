@@ -1,15 +1,18 @@
 import { Button } from "../ui/button";
 import CartItem from "./CartItem";
-import * as ordersService from "@/utilities/orders-service";
+import { placeOrder } from "@/utilities/orders-service";
+import { useToast } from "@/components/ui/use-toast";
+import dayjs from "dayjs";
 
 export default function Cart({ user, cart, setCart }) {
-  console.log(user);
+  const { toast } = useToast();
+
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  const handleOrder = async () => {
+  const handleCheckOut = async () => {
     const transformedCartData = cart.map((item) => {
       return {
         fruit: item._id,
@@ -17,20 +20,24 @@ export default function Cart({ user, cart, setCart }) {
       };
     });
 
-    console.log("transformedCartData", transformedCartData);
-
     const orderData = {
       items: transformedCartData,
       totalPrice: totalPrice,
     };
 
-    console.log("orderData", orderData);
+    await placeOrder(orderData);
 
-    await ordersService.placeOrder(orderData);
+    setCart([]);
+
+    toast({
+      title: "Order Successfully Placed",
+      description: dayjs(new Date().toISOString()).format("DD-MMM-YYYY HH:mm"),
+    });
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
+      <h1 className="text-center">Cart</h1>
       {cart.map((item) => (
         <CartItem key={item.id} item={item} cart={cart} setCart={setCart} />
       ))}
@@ -38,7 +45,7 @@ export default function Cart({ user, cart, setCart }) {
         <div>Total</div>
         <div>${Number(totalPrice).toFixed(2)}</div>
       </div>
-      <Button onClick={() => handleOrder(cart)}>Checkout</Button>
+      <Button onClick={() => handleCheckOut(cart)}>Checkout</Button>
     </div>
   );
 }

@@ -26,7 +26,7 @@ export default function Product({ item, cart, setCart }) {
   };
 
   return (
-    <Card>
+    <Card className="w-fit">
       <CardHeader>
         <CardTitle>{item.fruit}</CardTitle>
       </CardHeader>
@@ -39,7 +39,7 @@ export default function Product({ item, cart, setCart }) {
       <CardFooter>
         <div className="flex flex-col">
           <Button onClick={() => handleCart(item)}>Add to Cart</Button>
-          <p className="text-xs mt-2"> {item.stock} in stock</p>
+          <p className="text-xs mt-2"> {item.remainingStock} in stock</p>
         </div>
       </CardFooter>
     </Card>

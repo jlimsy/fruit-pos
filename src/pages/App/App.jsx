@@ -6,8 +6,9 @@ import AuthPage from "../Auth/AuthPage";
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
-import SellerPage from "../Seller/SellerPage";
+import OwnerPage from "../Owner/OwnerPage";
 import AuthenticatedLayout from "@/layout/AuthenticatedLayout";
+import ViewOrdersPage from "../Owner/ViewOrdersPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -25,7 +26,9 @@ function App() {
             />
             <Route path="/orders/history" element={<OrderHistoryPage />} />
             <Route path="/orders/checkout" element={<CheckoutPage />} />
-            <Route path="/seller/update" element={<SellerPage />} />
+            <Route path="/owner/update" element={<OwnerPage />} />
+            <Route path="/owner/view" element={<ViewOrdersPage />} />
+
             <Route path="*" element={<Navigate to="/orders/new" replace />} />
           </Route>
         ) : (

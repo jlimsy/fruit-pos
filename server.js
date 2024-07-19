@@ -2,6 +2,7 @@
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
+const { authJWT } = require("./middleware/authJWT");
 
 // configure databse
 require("dotenv").config();

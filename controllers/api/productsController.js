@@ -1,6 +1,6 @@
 const Product = require("../../models/product");
 
-async function getAll(req, res) {
+async function index(req, res) {
   try {
     const all = await Product.find({});
 
@@ -20,4 +20,4 @@ async function create(req, res) {
   }
 }
 
-module.exports = { getAll, create };
+module.exports = { index, create };
