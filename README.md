@@ -11,4 +11,7 @@
 ### Owner User Story
 
 1. Owner has access to Owner tab in the navigation menu.
-2. Owner can add new fruits into his inventory.
+2. Owner access allows the following features:
+- Owner can view all orders.
+- Owner can add new fruits into his inventory.
+- Owner can view Sales Dashboard.
