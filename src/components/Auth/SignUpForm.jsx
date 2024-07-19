@@ -20,8 +20,11 @@ export default function SignUpForm({ setIsNewUser }) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const password = watch("password");
 
   const submitData = async (event) => {
     setIsLoading(true);
@@ -55,10 +58,10 @@ export default function SignUpForm({ setIsNewUser }) {
             <Input
               id="name"
               placeholder="username"
-              {...register("name", { required: true })}
+              {...register("name", { required: "Name is required." })}
             />
 
-            {errors.name && <p>Name is required.</p>}
+            {errors.name && <p>{errors.name.message}</p>}
 
             <Label className="sr-only" htmlFor="email">
               Email
@@ -73,31 +76,43 @@ export default function SignUpForm({ setIsNewUser }) {
               autoCorrect="off"
               disabled={isLoading}
               {...register("email", {
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Please enter a valid e-mail address",
+                },
                 required: true,
               })}
             />
-            {errors.email && <p>Please enter a valid e-mail address.</p>}
+            {errors.email && <p>{errors.email.message}</p>}
 
             <Input
               id="password"
               placeholder="password"
               type="password"
               autoComplete="password"
-              {...register("password", { pattern: /\d+/ })}
+              {...register("password", {
+                pattern: /\d+/,
+                required: true,
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters.",
+                },
+              })}
             />
-            {errors.password && (
-              <p>Please ensure your password contains at least 6 characters.</p>
-            )}
+            {errors.password && <p>{errors.password.message}</p>}
 
             <Input
               id="confirm"
               placeholder="confirm password"
               type="password"
               autoComplete="password"
-              {...register("confirm", { pattern: /\d+/ })}
+              {...register("confirm", {
+                required: true,
+                validate: (value) =>
+                  value === password || "Passwords do not match.",
+              })}
             />
-            {errors.confirm && <p>Passwords do not match.</p>}
+            {errors.confirm && <p>{errors.confirm.message}</p>}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
