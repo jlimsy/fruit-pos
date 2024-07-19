@@ -1,6 +1,7 @@
 # fruit-pos
 
-A Point-of-Sale system for a fruit stall, built with MERN Stack
+A Point-of-Sale system for a fruit stall, built with MERN-stack.
+Deployed site: https://fruit-pos.vercel.app/
 
 ## Features
 
