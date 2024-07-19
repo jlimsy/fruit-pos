@@ -36,7 +36,7 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav>
-      <NavigationMenu className="bg-primary-foreground p-4 ">
+      <NavigationMenu className="bg-accent p-4 ">
         <NavigationMenuList className="flex w-screen px-10 justify-between">
           <div>
             <p>Welcome, {user.name}!</p>
