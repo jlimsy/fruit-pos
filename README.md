@@ -1,5 +1,8 @@
 # fruit-pos
 
+A Point-of-Sale system for a fruit stall, built with MERN-stack.
+Deployed site: https://fruit-pos.vercel.app/
+
 ## Features
 
 ### Buyer User Story
@@ -12,6 +15,6 @@
 
 1. Owner has access to Owner tab in the navigation menu.
 2. Owner access allows the following features:
-- Owner can view all orders.
-- Owner can add new fruits into his inventory.
-- Owner can view Sales Dashboard (in progress)
+    - Owner can view all orders.
+    - Owner can add new fruits into fruit inventory.
+    - Owner can view Sales Dashboard (in progress)
