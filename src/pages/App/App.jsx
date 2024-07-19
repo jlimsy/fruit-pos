@@ -9,6 +9,7 @@ import { getUser } from "../../utilities/users-service";
 import OwnerPage from "../Owner/OwnerPage";
 import AuthenticatedLayout from "@/layout/AuthenticatedLayout";
 import ViewOrdersPage from "../Owner/ViewOrdersPage";
+import DashboardPage from "../Owner/DashboardPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -28,6 +29,7 @@ function App() {
             <Route path="/orders/checkout" element={<CheckoutPage />} />
             <Route path="/owner/update" element={<OwnerPage />} />
             <Route path="/owner/view" element={<ViewOrdersPage />} />
+            <Route path="/owner/dashboard" element={<DashboardPage />} />
 
             <Route path="*" element={<Navigate to="/orders/new" replace />} />
           </Route>
