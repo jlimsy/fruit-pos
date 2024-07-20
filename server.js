@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const { authJWT } = require("./middleware/authJWT");
+const cors = require("cors");
 
 // configure databse
 require("dotenv").config();
@@ -15,6 +16,13 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
+app.use(
+  cors({
+    origin: [""],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 // API routes
 app.use("/api/users", require("./routes/api/usersRouter"));
