@@ -8,7 +8,6 @@
     { "src": "/api/(.*)", "dest": "server.js" },
     { "src": "/(.*)", "dest": "/src/$1" },
     { "src": "/index.html", "dest": "/index.html" }
-  ],
-  "cleanUrls": true
+  ]
 
 }
