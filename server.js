@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(
   cors({
-    origin: [""],
+    origin: ["https://fruit-pos-4voa.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
