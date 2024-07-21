@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 export default function CartItem({ item, cart, setCart }) {
   const handleAdd = (event) => {
     setCart((prevItems) => {
-      console.log("prevItems, prevItems", prevItems);
       return prevItems.map((item) =>
         item.id === event.id ? { ...item, quantity: item.quantity + 1 } : item
       );
@@ -30,7 +29,6 @@ export default function CartItem({ item, cart, setCart }) {
 
   const handleRemove = (event) => {
     setCart(cart.filter((cartItem) => cartItem.id !== event.id));
-    console.log("Remove");
   };
 
   return (

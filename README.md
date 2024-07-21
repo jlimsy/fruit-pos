@@ -11,6 +11,8 @@ Deployed site: https://fruit-pos.vercel.app/
 2. Buyer can click on the fruits to add them to cart.
 3. Buyer can increase or decrease the number of fruits in the cart, and view individual and total price of the fruits in the cart.
 4. Upon successful checkout of cart, buyer receives a notification.
+5. Buyer can view remaining stock immediately after checkout.
+6. Buyer can view order history sorted by latest order first.
 
 ### Owner User Story
 
@@ -29,8 +31,18 @@ Deployed site: https://fruit-pos.vercel.app/
 
 #### Login
 
-1.  If user email does not exist in database, error message informs that account does not exist.
+1. If required fields are empty, error messages remind user to fill in the required fields.
+2. If login credentials are incorrect, error message informs user that crednetials are incorrect.
 
 ---
 
 #### Technology
+
+MERN Stack - MongoDB, Express, React, Node
+
+#### Libraries
+
+- Authentication: JWT with bcrypt
+- Forms and validations: react-hook-form
+- Styling: Shadcn, Tailwind CSS
+- Charts: recharts

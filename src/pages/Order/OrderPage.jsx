@@ -21,7 +21,7 @@ export default function OrderPage({ user, setUser }) {
     };
 
     fetchProducts();
-  }, []);
+  }, [cart]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-10">
