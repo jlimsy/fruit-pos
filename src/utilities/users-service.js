@@ -11,6 +11,13 @@ export async function signUp(userData) {
   return getUser();
 }
 
+export async function checkUserExists(email) {
+  log("email", email);
+  const userExists = await usersAPI.checkUserExists(email);
+  log("userExists", userExists);
+  return userExists;
+}
+
 export function getToken() {
   const token = localStorage.getItem("token");
 

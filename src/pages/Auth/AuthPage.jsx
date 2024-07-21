@@ -16,7 +16,7 @@ export default function AuthPage({ setUser }) {
           )}
         </div>
       </div>
-      <div className=" md:col-span-2 bg-[url('/public/fruit.jpg')] bg-cover bg-bottom"></div>
+      <div className=" md:col-span-2 bg-[url('/fruit.jpg')] bg-cover bg-bottom"></div>
     </div>
   );
 }

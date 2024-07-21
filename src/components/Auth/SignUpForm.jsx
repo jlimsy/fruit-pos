@@ -14,13 +14,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import debug from "debug";
+const log = debug("components:SignUpForm");
+
 export default function SignUpForm({ setIsNewUser }) {
   const [isLoading, setIsLoading] = useState(false);
+
+  log("setIsNewUser %o", setIsNewUser);
 
   const {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors },
   } = useForm();
 
@@ -29,19 +35,29 @@ export default function SignUpForm({ setIsNewUser }) {
   const submitData = async (event) => {
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
     try {
       const { name, email, password } = event;
       const formData = { name, email, password };
+      log("formData %o", formData);
+      console.log("formData %o", formData);
 
-      await usersService.signUp(formData);
-      setIsNewUser(false);
+      const userExists = await usersService.checkUserExists(email);
+      log("userExists %o", userExists);
+      console.log("userExists %o", userExists);
+
+      if (userExists) {
+        setError("email", { type: "manual", message: "User already exists" });
+        setIsLoading(false);
+        return;
+      } else {
+        await usersService.signUp(formData);
+        setIsNewUser(false);
+      }
     } catch (error) {
       console.log("Unable to sign up:", error);
     }
+
+    setIsLoading(false);
   };
 
   return (

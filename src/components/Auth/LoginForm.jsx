@@ -28,10 +28,6 @@ export default function LoginForm({ setUser, setIsNewUser }) {
   const submitData = async (event) => {
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
     try {
       const { email, password } = event;
       const formData = { email, password };
