@@ -1,6 +1,6 @@
 import DailySalesChart from "./DailySalesChart";
 import { useState, useEffect } from "react";
-import { getTotalSalesPerDay } from "@/utilities/orders-service";
+import { getFruitsPerDay } from "@/utilities/orders-service";
 
 import debug from "debug";
 
@@ -17,40 +17,60 @@ import {
 } from "@/components/ui/card";
 
 export default function Dashboard() {
-  const [dailyTotal, setDailyTotal] = useState([]);
+  const [dailyFruits, setDailyFruits] = useState([]);
 
   useEffect(() => {
-    const fetchDailyTotal = async () => {
+    const fetchDailyTotalByFruits = async () => {
       try {
-        const daily = await getTotalSalesPerDay();
-        setDailyTotal(daily);
+        const daily = await getFruitsPerDay();
+        setDailyFruits(daily);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
 
-    fetchDailyTotal();
+    fetchDailyTotalByFruits();
   }, []);
 
-  log("Daily Total %o", dailyTotal);
+  log("Daily Fruits %o", dailyFruits);
 
-  const overallSales = dailyTotal.reduce(
+  const salesByDay = [];
+
+  dailyFruits.forEach((day) => {
+    const overallRevenue = day.fruitSales.reduce((acc, curr) => {
+      const revenuePerDay = parseFloat(
+        curr.totalPricePerProduct.$numberDecimal
+      );
+      console.log("Revenue per day %o", revenuePerDay);
+      acc += revenuePerDay;
+      console.log("acc %o", acc);
+      return acc;
+    }, 0);
+
+    const overallProducts = day.fruitSales.reduce((acc, curr) => {
+      const productsPerDay = curr.totalQuantity;
+
+      acc += productsPerDay;
+      console.log("acc %o", acc);
+      return acc;
+    }, 0);
+
+    salesByDay.push({ date: day._id, overallRevenue, overallProducts });
+  });
+
+  log("DailyRevenue %o", salesByDay);
+
+  const overallDailySales = salesByDay.reduce(
     (acc, curr) => {
-      const revenuePerDay = parseFloat(curr.totalPricePerDay.$numberDecimal);
-      const quantityPerDay = curr.quantityProductsPerDay;
-
-      acc.overallRevenue += revenuePerDay;
-      acc.overallProducts += quantityPerDay;
+      acc.overallRevenue += curr.overallRevenue;
+      acc.overallProducts += curr.overallProducts;
 
       return acc;
     },
-    {
-      overallRevenue: 0,
-      overallProducts: 0,
-    }
+    { overallRevenue: 0, overallProducts: 0 }
   );
 
-  log("Overall Sales %o", overallSales);
+  log("overallRevenue %o", overallDailySales);
 
   return (
     <div className="grid lg:grid-cols-3 justify-center gap-4 mx-auto">
@@ -61,12 +81,12 @@ export default function Dashboard() {
         <CardContent>
           <div className="flex flex-col justify-around gap-4">
             <div className="flex justify-center items-center flex-col">
-              <h1 className="text-7xl">${overallSales.overallRevenue}</h1>
+              <h1 className="text-7xl">${overallDailySales.overallRevenue}</h1>
               <span className="text-primary font-bold">total revenue</span>
             </div>
 
             <div className="flex justify-center items-center flex-col">
-              <h1 className="text-7xl">{overallSales.overallProducts}</h1>
+              <h1 className="text-7xl">{overallDailySales.overallProducts}</h1>
               <span className="text-primary font-bold">total fruits sold</span>
             </div>
           </div>
@@ -78,7 +98,7 @@ export default function Dashboard() {
           <CardTitle>Daily Sales</CardTitle>
         </CardHeader>
         <CardContent>
-          <DailySalesChart dailyTotal={dailyTotal} />
+          <DailySalesChart salesByDay={salesByDay} />
         </CardContent>
       </Card>
     </div>

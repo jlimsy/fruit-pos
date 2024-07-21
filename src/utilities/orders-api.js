@@ -32,7 +32,7 @@ export async function getAllOrders() {
   }
 }
 
-export async function getTotalSalesPerDay() {
+export async function getFruitsPerDay() {
   const res = await sendRequest(BASE_URL + "/sales/daily", "GET");
 
   if (res.ok) {
