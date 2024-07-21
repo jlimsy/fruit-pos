@@ -16,13 +16,6 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
-app.use(
-  cors({
-    origin: ["https://fruit-pos-4voa.vercel.app/"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
 
 // API routes
 app.use("/api/users", require("./routes/api/usersRouter"));

@@ -1,4 +1,4 @@
-const BASE_URL = "https://fruit-pos.vercel.app/api/users";
+const BASE_URL = "/api/users";
 
 export async function signUp(userData) {
   const res = await fetch(BASE_URL, {
