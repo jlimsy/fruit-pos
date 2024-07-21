@@ -6,9 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "../ui/spinner";
 import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import dayjs from "dayjs";
 
 export default function UpdateInventoryForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   const {
     register,
@@ -32,6 +35,13 @@ export default function UpdateInventoryForm() {
       const product = await productsService.updateInventory(formData);
       setIsLoading(false);
       reset();
+
+      toast({
+        title: "Inventory Successfully Updated",
+        description: dayjs(new Date().toISOString()).format(
+          "DD-MMM-YYYY HH:mm"
+        ),
+      });
     } catch (error) {
       console.log("Unable to update inventory", error);
     }
@@ -47,25 +57,39 @@ export default function UpdateInventoryForm() {
             <Input
               id="fruit"
               placeholder="Name of fruit"
-              {...register("fruit", { required: true })}
+              {...register("fruit", { required: "Name of fruit is required." })}
             />
-            {errors.fruit && <p>Name of fruit is required.</p>}
+            {errors.fruit && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.fruit.message}
+              </p>
+            )}
 
             <Label htmlFor="fruit">Price</Label>
             <Input
               id="price"
               placeholder="Price"
-              {...register("price", { required: true })}
+              {...register("price", { required: "Price is required." })}
             />
-            {errors.price && <p>Price is required.</p>}
+            {errors.price && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.price.message}
+              </p>
+            )}
 
             <Label htmlFor="starting-stock">Starting Stock</Label>
             <Input
               id="starting-stock"
               placeholder="Starting stock"
-              {...register("startingStock", { required: true })}
+              {...register("startingStock", {
+                required: "Starting stock is required.",
+              })}
             />
-            {errors.stock && <p>Starting stock is required.</p>}
+            {errors.startingStock && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.startingStock.message}
+              </p>
+            )}
 
             <Label htmlFor="remaining-stock">Available Stock</Label>
             <Input
@@ -73,7 +97,11 @@ export default function UpdateInventoryForm() {
               placeholder="Available stock"
               {...register("remainingStock")}
             />
-            {errors.stock && <p>Remaining stock is required.</p>}
+            {errors.stock && (
+              <p className="text-sm text-destructive pl-3">
+                Remaining stock is required.
+              </p>
+            )}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}

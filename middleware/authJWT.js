@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 const log = require("debug")("middleware:authJWT");
 
 const authJWT = (req, res, next) => {
-  log("req.user %o", req.user);
-  log("req.body %o", req.body);
+  // log("req.user %o", req.user);
+  // log("req.body %o", req.body);
 
   try {
     const token = req.get("Authorization").split(" ")[1];

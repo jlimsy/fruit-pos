@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const { authJWT } = require("./middleware/authJWT");
-const cors = require("cors");
+const debug = require("debug")("fruit-pos:server");
 
 // configure databse
 require("dotenv").config();

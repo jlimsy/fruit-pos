@@ -1,0 +1,23 @@
+meta {
+  name: order
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3000/api/products
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2OTdlNzVkNWI5Yzc5OTIxZjM0YWQxNyIsIm5hbWUiOiJvd25lciIsImVtYWlsIjoib3duZXJAZnJ1aXRzLmNvbSIsInJvbGUiOiJvd25lciIsImNyZWF0ZWRBdCI6IjIwMjQtMDctMTdUMTU6NDY6MzcuNzc5WiIsInVwZGF0ZWRBdCI6IjIwMjQtMDctMTdUMTU6NDY6MzcuNzc5WiIsIl9fdiI6MH0sImlhdCI6MTcyMTU1NjAzNCwiZXhwIjoxNzIxNzI4ODM0fQ.UVHsUmLfpDn9mJ0cK7XuAdfM2nfWl1BlBhfHS8INtzE
+}
+
+body:json {
+  {
+    "fruit": "peach",
+    "price": "1.00",
+    "startingStock": "100"
+  }
+}

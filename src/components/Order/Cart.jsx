@@ -27,6 +27,8 @@ export default function Cart({ user, cart, setCart }) {
 
     await placeOrder(orderData);
 
+    console.log("orderData", orderData);
+
     setCart([]);
 
     toast({

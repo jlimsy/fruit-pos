@@ -14,6 +14,21 @@ export async function signUp(userData) {
   }
 }
 
+export async function checkUserExists(email) {
+  const res = await fetch(BASE_URL + "/check-user", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+
+  if (res.status === 409 || res.status === 200) {
+    const data = await res.json();
+    return data.exists;
+  } else {
+    throw new Error("Unable to check if user exists");
+  }
+}
+
 export async function login(credentials) {
   const res = await fetch(BASE_URL + "/login", {
     method: "POST",

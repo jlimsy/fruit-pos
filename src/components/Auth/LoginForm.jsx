@@ -22,15 +22,12 @@ export default function LoginForm({ setUser, setIsNewUser }) {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
 
   const submitData = async (event) => {
     setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
 
     try {
       const { email, password } = event;
@@ -41,6 +38,12 @@ export default function LoginForm({ setUser, setIsNewUser }) {
 
       navigate("/orders/new");
     } catch (error) {
+      setError("password", {
+        type: "manual",
+        message: "Incorrect login credentials.",
+      });
+      setIsLoading(false);
+
       console.log("Unable to login:", error);
     }
   };
@@ -62,9 +65,15 @@ export default function LoginForm({ setUser, setIsNewUser }) {
               placeholder="name@example.com"
               type="email"
               autoComplete="email"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "Email is required.",
+              })}
             />
-            {errors.email && <p>First name is required.</p>}
+            {errors.email && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.email.message}
+              </p>
+            )}
 
             <Label className="sr-only" htmlFor="password">
               Password
@@ -75,9 +84,13 @@ export default function LoginForm({ setUser, setIsNewUser }) {
               placeholder="password"
               type="password"
               autoComplete="password"
-              {...register("password", { required: true })}
+              {...register("password", { required: "Password is required." })}
             />
-            {errors.password && <p>Last name is required.</p>}
+            {errors.password && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.password.message}
+              </p>
+            )}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}

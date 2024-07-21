@@ -59,12 +59,12 @@ export default function ViewOrdersPage() {
                   {order.items.map((item) => (
                     <div key={item._id}>
                       <p>
-                        {item.fruit.fruit} x {item.quantity}
+                        {item.fruit?.fruit} x {item.quantity}
                       </p>
                     </div>
                   ))}
                 </TableCell>
-                <TableCell>${Number(order.totalPrice).toFixed(2)}</TableCell>{" "}
+                <TableCell>${Number(order.totalPrice).toFixed(2)}</TableCell>
                 <TableCell>{order.user.name}</TableCell>
                 <TableCell>{order.status}</TableCell>
               </TableRow>

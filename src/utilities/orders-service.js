@@ -9,3 +9,8 @@ export async function getAllOrders() {
   const orders = await ordersAPI.getAllOrders();
   return orders;
 }
+
+export async function getTotalSalesPerDay() {
+  const totalSalesPerDay = await ordersAPI.getTotalSalesPerDay();
+  return totalSalesPerDay;
+}

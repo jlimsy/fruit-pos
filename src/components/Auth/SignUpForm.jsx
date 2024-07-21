@@ -14,13 +14,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import debug from "debug";
+const log = debug("components:SignUpForm");
+
 export default function SignUpForm({ setIsNewUser }) {
   const [isLoading, setIsLoading] = useState(false);
+
+  log("setIsNewUser %o", setIsNewUser);
 
   const {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors },
   } = useForm();
 
@@ -29,19 +35,30 @@ export default function SignUpForm({ setIsNewUser }) {
   const submitData = async (event) => {
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
     try {
       const { name, email, password } = event;
       const formData = { name, email, password };
+      log("formData %o", formData);
 
-      await usersService.signUp(formData);
-      setIsNewUser(false);
+      const userExists = await usersService.checkUserExists(email);
+      log("userExists %o", userExists);
+
+      if (userExists) {
+        setError("email", {
+          type: "manual",
+          message: "Account already exists.",
+        });
+        setIsLoading(false);
+        return;
+      } else {
+        await usersService.signUp(formData);
+        setIsNewUser(false);
+      }
     } catch (error) {
       console.log("Unable to sign up:", error);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -61,7 +78,11 @@ export default function SignUpForm({ setIsNewUser }) {
               {...register("name", { required: "Name is required." })}
             />
 
-            {errors.name && <p>{errors.name.message}</p>}
+            {errors.name && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.name.message}
+              </p>
+            )}
 
             <Label className="sr-only" htmlFor="email">
               Email
@@ -83,7 +104,11 @@ export default function SignUpForm({ setIsNewUser }) {
                 required: true,
               })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.email.message}
+              </p>
+            )}
 
             <Input
               id="password"
@@ -99,7 +124,11 @@ export default function SignUpForm({ setIsNewUser }) {
                 },
               })}
             />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.password.message}
+              </p>
+            )}
 
             <Input
               id="confirm"
@@ -112,7 +141,11 @@ export default function SignUpForm({ setIsNewUser }) {
                   value === password || "Passwords do not match.",
               })}
             />
-            {errors.confirm && <p>{errors.confirm.message}</p>}
+            {errors.confirm && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.confirm.message}
+              </p>
+            )}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
