@@ -1,6 +1,10 @@
-import { Bar, BarChart } from "recharts";
+import { Bar, BarChart, XAxis } from "recharts";
 
-import { ChartContainer } from "@/components/ui/chart";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
@@ -14,21 +18,41 @@ const chartData = [
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "#2563eb",
   },
   mobile: {
     label: "Mobile",
-    color: "",
   },
 };
 
 export default function YearlySalesChart() {
   return (
     <div>
-      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+      <ChartContainer
+        config={chartConfig}
+        className="max-h-[400px] max-w-[400px]"
+      >
         <BarChart accessibilityLayer data={chartData}>
-          <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-          <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+          <XAxis
+            dataKey="month"
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+            tickFormatter={(value) => value.slice(0, 3)}
+          />
+          <ChartTooltip content={<ChartTooltipContent />} />
+
+          <Bar
+            dataKey="desktop"
+            stackId="a"
+            fill="hsl(var(--chart-1))"
+            radius={4}
+          />
+          <Bar
+            dataKey="mobile"
+            stackId="a"
+            fill="hsl(var(--chart-2))"
+            radius={4}
+          />
         </BarChart>
       </ChartContainer>
     </div>
