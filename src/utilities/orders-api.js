@@ -31,3 +31,13 @@ export async function getAllOrders() {
     throw new Error("Unable to retrieve orders");
   }
 }
+
+export async function getTotalSalesPerDay() {
+  const res = await sendRequest(BASE_URL + "/sales/daily", "GET");
+
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Unable to retrieve sales");
+  }
+}

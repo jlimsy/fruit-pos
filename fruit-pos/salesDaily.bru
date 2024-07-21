@@ -1,0 +1,23 @@
+meta {
+  name: salesDaily
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:3000/api/orders/sales/daily
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2OTdlNzVkNWI5Yzc5OTIxZjM0YWQxNyIsIm5hbWUiOiJvd25lciIsImVtYWlsIjoib3duZXJAZnJ1aXRzLmNvbSIsInJvbGUiOiJvd25lciIsImNyZWF0ZWRBdCI6IjIwMjQtMDctMTdUMTU6NDY6MzcuNzc5WiIsInVwZGF0ZWRBdCI6IjIwMjQtMDctMTdUMTU6NDY6MzcuNzc5WiIsIl9fdiI6MH0sImlhdCI6MTcyMTU2NTEyNSwiZXhwIjoxNzIxNzM3OTI1fQ.tRbo0Vwtnv0bfx2WKRl00grdX53t4QTCaJ7LeVoodkI
+}
+
+body:json {
+  {
+    "name": "buyer",
+    "email": "buyer@world.com",
+    "password": "123456"
+  }
+}

@@ -44,7 +44,7 @@ export default function OrderHistoryPage() {
             {order.items.map((item) => (
               <div key={item._id}>
                 <p>
-                  {item.fruit.fruit} x {item.quantity}
+                  {item.fruit?.fruit} x {item.quantity}
                 </p>
               </div>
             ))}

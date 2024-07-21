@@ -18,9 +18,9 @@ Deployed site: https://fruit-pos.vercel.app/
 
 1. Owner has access to Owner tab in the navigation menu.
 2. Owner access allows the following features:
-   - Owner can view all orders.
+   - Owner can view all pending orders.
    - Owner can add new fruits into fruit inventory.
-   - Owner can view Sales Dashboard (in progress)
+   - Owner can view Sales Dashboard.
 
 ### Authentication User Story
 
