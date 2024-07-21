@@ -25,7 +25,7 @@ export async function checkUserExists(email) {
     const data = await res.json();
     return data.exists;
   } else {
-    throw new Error("Unable to check user exists");
+    throw new Error("Unable to check if user exists");
   }
 }
 

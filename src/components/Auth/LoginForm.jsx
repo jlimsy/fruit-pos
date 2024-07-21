@@ -33,20 +33,17 @@ export default function LoginForm({ setUser, setIsNewUser }) {
       const { email, password } = event;
       const formData = { email, password };
 
-      const userExists = await usersService.checkUserExists(email);
-
-      if (!userExists) {
-        setError("email", {
-          type: "manual",
-          message: "Account does not exist.",
-        });
-      }
-
       const user = await usersService.login(formData);
       setUser(user);
 
       navigate("/orders/new");
     } catch (error) {
+      setError("password", {
+        type: "manual",
+        message: "Incorrect login credentials.",
+      });
+      setIsLoading(false);
+
       console.log("Unable to login:", error);
     }
   };
