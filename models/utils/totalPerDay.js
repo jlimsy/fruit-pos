@@ -20,6 +20,7 @@ const totalPerDay = [
       },
     },
   },
+
   {
     $sort: {
       "_id.date": 1, // Sort by date ascending

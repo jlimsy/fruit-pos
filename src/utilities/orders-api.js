@@ -41,3 +41,13 @@ export async function getTotalSalesPerDay() {
     throw new Error("Unable to retrieve sales");
   }
 }
+
+export async function getFruitsPerDay() {
+  const res = await sendRequest(BASE_URL + "/sales/fruits", "GET");
+
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Unable to retrieve sales");
+  }
+}

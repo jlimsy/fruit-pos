@@ -21,6 +21,9 @@ Deployed site: https://fruit-pos.vercel.app/
    - Owner can view all pending orders.
    - Owner can add new fruits into fruit inventory.
    - Owner can view Sales Dashboard.
+3. In Sales Dashboard, owner can view:
+   - Overall revenue made
+   - Overall number of fruits sold
 
 ### Authentication User Story
 

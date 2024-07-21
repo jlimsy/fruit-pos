@@ -14,4 +14,11 @@ router.get(
   ordersCtrl.getTotalSalesPerDay
 );
 
+router.get(
+  "/sales/fruits",
+  authJWT,
+  checkRole("owner"),
+  ordersCtrl.getFruitsPerDay
+);
+
 module.exports = router;

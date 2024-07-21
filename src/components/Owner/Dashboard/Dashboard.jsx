@@ -37,6 +37,8 @@ export default function Dashboard() {
   const overallSales = dailyTotal.reduce(
     (acc, curr) => {
       const revenuePerDay = parseFloat(curr.totalPricePerDay.$numberDecimal);
+
+      console.log(curr.totalPricePerDay.$numberDecimal);
       const quantityPerDay = curr.quantityProductsPerDay;
 
       acc.overallRevenue += revenuePerDay;
