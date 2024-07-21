@@ -32,18 +32,8 @@ export async function getAllOrders() {
   }
 }
 
-export async function getTotalSalesPerDay() {
-  const res = await sendRequest(BASE_URL + "/sales/daily", "GET");
-
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Unable to retrieve sales");
-  }
-}
-
 export async function getFruitsPerDay() {
-  const res = await sendRequest(BASE_URL + "/sales/fruits", "GET");
+  const res = await sendRequest(BASE_URL + "/sales/daily", "GET");
 
   if (res.ok) {
     return res.json();

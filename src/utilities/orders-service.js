@@ -10,7 +10,7 @@ export async function getAllOrders() {
   return orders;
 }
 
-export async function getTotalSalesPerDay() {
-  const totalSalesPerDay = await ordersAPI.getTotalSalesPerDay();
-  return totalSalesPerDay;
+export async function getFruitsPerDay() {
+  const dailyFruits = await ordersAPI.getFruitsPerDay();
+  return dailyFruits;
 }

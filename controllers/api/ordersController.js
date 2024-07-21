@@ -1,6 +1,5 @@
 const Order = require("../../models/order");
 const mongoose = require("mongoose");
-const { totalPerDay } = require("../../models/utils/totalPerDay");
 const { fruitPerDay } = require("../../models/utils/fruitPerDay");
 const log = require("debug")("controller:ordersController");
 
@@ -70,16 +69,6 @@ async function index(req, res) {
   }
 }
 
-async function getTotalSalesPerDay(req, res) {
-  try {
-    const dailySales = await Order.aggregate(totalPerDay);
-    log("dailySales %o", dailySales);
-    res.json(dailySales);
-  } catch (error) {
-    res.status(400).json(error);
-  }
-}
-
 async function getFruitsPerDay(req, res) {
   try {
     const dailySalesByFruits = await Order.aggregate(fruitPerDay);
@@ -94,6 +83,5 @@ module.exports = {
   create,
   getMyOrders,
   index,
-  getTotalSalesPerDay,
   getFruitsPerDay,
 };

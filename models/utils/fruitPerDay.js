@@ -37,15 +37,11 @@ const fruitPerDay = [
       totalQuantity: {
         $sum: "$orders.items.quantity",
       },
-      totalPrice: {
-        $first: "$orders.totalPrice",
-      },
     },
   },
   {
     $group: {
       _id: "$_id.date",
-      totalPrice: { $sum: "$totalPrice" },
       fruitSales: {
         $push: {
           fruit: "$_id.fruit",
@@ -62,7 +58,7 @@ const fruitPerDay = [
 
   {
     $sort: {
-      "_id.date": 1, // Sort by date ascending
+      _id: 1, // Sort by date ascending
     },
   },
 ];

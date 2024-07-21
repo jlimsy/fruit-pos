@@ -17,12 +17,12 @@ const chartConfig = {
   },
 };
 
-export default function DailySalesChart({ dailyTotal }) {
-  log("dailyTotal %o", dailyTotal);
+export default function DailySalesChart({ salesByDay }) {
+  log("salesByDay %o", salesByDay);
 
-  const chartData = dailyTotal.map((item) => ({
-    date: item._id.date,
-    totalDailyPrice: item.totalPricePerDay.$numberDecimal,
+  const chartData = salesByDay.map((item) => ({
+    date: item.date,
+    totalDailyPrice: item.overallRevenue,
   }));
 
   log("chartData %o", chartData);
