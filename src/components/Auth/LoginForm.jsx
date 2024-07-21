@@ -22,6 +22,7 @@ export default function LoginForm({ setUser, setIsNewUser }) {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
 
@@ -31,6 +32,15 @@ export default function LoginForm({ setUser, setIsNewUser }) {
     try {
       const { email, password } = event;
       const formData = { email, password };
+
+      const userExists = await usersService.checkUserExists(email);
+
+      if (!userExists) {
+        setError("email", {
+          type: "manual",
+          message: "Account does not exist.",
+        });
+      }
 
       const user = await usersService.login(formData);
       setUser(user);
@@ -58,9 +68,15 @@ export default function LoginForm({ setUser, setIsNewUser }) {
               placeholder="name@example.com"
               type="email"
               autoComplete="email"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "Email is required.",
+              })}
             />
-            {errors.email && <p>First name is required.</p>}
+            {errors.email && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.email.message}
+              </p>
+            )}
 
             <Label className="sr-only" htmlFor="password">
               Password
@@ -71,9 +87,13 @@ export default function LoginForm({ setUser, setIsNewUser }) {
               placeholder="password"
               type="password"
               autoComplete="password"
-              {...register("password", { required: true })}
+              {...register("password", { required: "Password is required." })}
             />
-            {errors.password && <p>Last name is required.</p>}
+            {errors.password && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.password.message}
+              </p>
+            )}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}

@@ -39,14 +39,15 @@ export default function SignUpForm({ setIsNewUser }) {
       const { name, email, password } = event;
       const formData = { name, email, password };
       log("formData %o", formData);
-      console.log("formData %o", formData);
 
       const userExists = await usersService.checkUserExists(email);
       log("userExists %o", userExists);
-      console.log("userExists %o", userExists);
 
       if (userExists) {
-        setError("email", { type: "manual", message: "User already exists" });
+        setError("email", {
+          type: "manual",
+          message: "Account already exists.",
+        });
         setIsLoading(false);
         return;
       } else {
@@ -77,7 +78,11 @@ export default function SignUpForm({ setIsNewUser }) {
               {...register("name", { required: "Name is required." })}
             />
 
-            {errors.name && <p>{errors.name.message}</p>}
+            {errors.name && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.name.message}
+              </p>
+            )}
 
             <Label className="sr-only" htmlFor="email">
               Email
@@ -99,7 +104,11 @@ export default function SignUpForm({ setIsNewUser }) {
                 required: true,
               })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.email.message}
+              </p>
+            )}
 
             <Input
               id="password"
@@ -115,7 +124,11 @@ export default function SignUpForm({ setIsNewUser }) {
                 },
               })}
             />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.password.message}
+              </p>
+            )}
 
             <Input
               id="confirm"
@@ -128,7 +141,11 @@ export default function SignUpForm({ setIsNewUser }) {
                   value === password || "Passwords do not match.",
               })}
             />
-            {errors.confirm && <p>{errors.confirm.message}</p>}
+            {errors.confirm && (
+              <p className="text-sm text-destructive pl-3">
+                {errors.confirm.message}
+              </p>
+            )}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
