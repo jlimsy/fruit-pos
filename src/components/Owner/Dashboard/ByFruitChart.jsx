@@ -7,6 +7,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { getProducts } from "@/utilities/products-service";
+import dayjs from "dayjs";
 
 import debug from "debug";
 import { useEffect, useState } from "react";
@@ -42,26 +43,12 @@ export default function ByFruitChart({ dailyFruits }) {
     }, {});
 
     return {
-      day: day._id,
+      day: dayjs(day._id).format("MMM-DD"),
       ...fruitSales,
     };
   });
 
   log("chartData %o", chartData);
-
-  //   let fruitNames = [];
-
-  //   dailyFruits.forEach((day) => {
-  //     if (day.fruitSales.length > fruitNames.length) {
-  //       fruitNames = [];
-  //       day.fruitSales.forEach((fruit) => {
-  //         fruitNames.push(fruit.productName);
-  //       });
-
-  //       return fruitNames;
-  //     }
-  //   });
-
   log("fruitNames %o", fruitNames);
 
   const chartConfig = fruitNames.reduce((acc, curr, idx) => {
@@ -85,7 +72,6 @@ export default function ByFruitChart({ dailyFruits }) {
             tickLine={false}
             tickMargin={10}
             axisLine={false}
-            tickFormatter={(value) => value.slice(0, 3)}
           />
           <ChartTooltip content={<ChartTooltipContent hideLabel />} />
           <ChartLegend content={<ChartLegendContent />} />

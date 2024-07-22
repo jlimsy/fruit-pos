@@ -1,4 +1,5 @@
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import dayjs from "dayjs";
 import debug from "debug";
 
 const log = debug("components:DailySalesChart");
@@ -21,7 +22,7 @@ export default function DailySalesChart({ salesByDay }) {
   log("salesByDay %o", salesByDay);
 
   const chartData = salesByDay.map((item) => ({
-    date: item.date,
+    date: dayjs(item.date).format("MMM-DD"),
     totalDailyPrice: item.overallRevenue,
   }));
 
