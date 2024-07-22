@@ -2,6 +2,7 @@
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
+const port = process.env.PORT || 3000;
 const { authJWT } = require("./middleware/authJWT");
 const debug = require("debug")("fruit-pos:server");
 
@@ -26,8 +27,6 @@ app.use("/api/orders", require("./routes/api/ordersRouter"));
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
-
-const port = process.env.PORT || 3000;
 
 app.listen(port, function () {
   console.log(`Express app running on port ${port}`);

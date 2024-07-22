@@ -74,7 +74,7 @@ export default function Dashboard() {
   log("overallRevenue %o", overallDailySales);
 
   return (
-    <div className="grid lg:grid-cols-3 justify-center gap-4 mx-auto ">
+    <div className="grid lg:grid-cols-3 justify-center gap-4 mx-auto">
       <Card>
         <CardHeader>
           <CardTitle>Overall Sales</CardTitle>
