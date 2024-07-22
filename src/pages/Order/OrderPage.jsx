@@ -13,7 +13,6 @@ export default function OrderPage({ user, setUser }) {
     const fetchProducts = async () => {
       try {
         const products = await getProducts();
-        console.log("Products:", products);
         setProducts(products);
       } catch (error) {
         console.error("Error fetching products:", error);

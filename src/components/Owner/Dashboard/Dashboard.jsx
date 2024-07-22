@@ -15,6 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ByFruitChart from "./ByFruitChart";
 
 export default function Dashboard() {
   const [dailyFruits, setDailyFruits] = useState([]);
@@ -99,6 +100,15 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent>
           <DailySalesChart salesByDay={salesByDay} />
+        </CardContent>
+      </Card>
+
+      <Card className="min-w-[400px]">
+        <CardHeader>
+          <CardTitle>Sales By Fruit</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ByFruitChart dailyFruits={dailyFruits} />
         </CardContent>
       </Card>
     </div>
