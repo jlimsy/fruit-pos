@@ -15,6 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ByFruitChart from "./ByFruitChart";
 
 export default function Dashboard() {
   const [dailyFruits, setDailyFruits] = useState([]);
@@ -73,7 +74,7 @@ export default function Dashboard() {
   log("overallRevenue %o", overallDailySales);
 
   return (
-    <div className="grid lg:grid-cols-3 justify-center gap-4 mx-auto">
+    <div className="grid lg:grid-cols-3 justify-center gap-4 mx-auto ">
       <Card>
         <CardHeader>
           <CardTitle>Overall Sales</CardTitle>
@@ -99,6 +100,15 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent>
           <DailySalesChart salesByDay={salesByDay} />
+        </CardContent>
+      </Card>
+
+      <Card className="min-w-[400px]">
+        <CardHeader>
+          <CardTitle>Sales By Fruit</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ByFruitChart dailyFruits={dailyFruits} />
         </CardContent>
       </Card>
     </div>
