@@ -1,7 +1,7 @@
 # fruit-pos
 
 A Point-of-Sale system for a fruit stall, built with MERN-stack.
-Deployed site: https://fruit-pos.vercel.app/
+Live site: https://fruit-pos.onrender.com/
 
 ## Features
 
@@ -24,6 +24,8 @@ Deployed site: https://fruit-pos.vercel.app/
 3. In Sales Dashboard, owner can view:
    - Overall revenue made
    - Overall number of fruits sold
+   - Revnue made per day
+   - Breakdown of fruits sold per day
 
 ### Authentication User Story
 
